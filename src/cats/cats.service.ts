@@ -8,8 +8,8 @@ import { Model } from 'mongoose';
 export class CatsService {
   @InjectModel(Cat.name) private model: Model<CatDocument>;
 
-  create(cat: Cat) {
-    return this.model.create(cat);
+  create(data: Cat) {
+    return this.model.create(data);
   }
 
   findAll() {
@@ -20,8 +20,8 @@ export class CatsService {
     return this.model.findById(id);
   }
 
-  update(id: string, cat: Cat) {
-    return this.model.findByIdAndUpdate(id, cat, { new: true });
+  update(id: string, data: Cat) {
+    return this.model.findByIdAndUpdate(id, data, { new: true });
   }
 
   delete(id: string) {
