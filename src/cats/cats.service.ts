@@ -27,4 +27,26 @@ export class CatsService {
   delete(id: string) {
     return this.model.findByIdAndRemove(id);
   }
+
+  // Cat and Owner relationships
+  addOwner(catId: string, ownerId: string) {
+    return this.model.findByIdAndUpdate(
+      catId,
+      { $addToSet: { owners: ownerId } },
+      { new: true },
+    );
+  }
+
+  removeOwner(catId: string, ownerId: string) {
+    return this.model.findByIdAndUpdate(
+      catId,
+      { $pull: { owners: ownerId } },
+      { new: true },
+    );
+  }
+
+  async getOwners(catId: string) {
+    const cat = await this.model.findById(catId).populate('owners');
+    return cat.owners;
+  }
 }

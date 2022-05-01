@@ -39,4 +39,20 @@ export class CatsController {
   remove(@Param('id') id: string) {
     return this.catsService.delete(id);
   }
+
+  // Cat and Owner relationships
+  @Patch('/:id/add-owner/:ownerId')
+  addOwner(@Param('id') catId: string, @Param('ownerId') ownerId: string) {
+    return this.catsService.addOwner(catId, ownerId);
+  }
+
+  @Patch('/:id/remove-owner/:ownerId')
+  removeOwner(@Param('id') catId: string, @Param('ownerId') ownerId: string) {
+    return this.catsService.removeOwner(catId, ownerId);
+  }
+
+  @Get('/:id/owners')
+  getOwners(@Param('id') catId: string) {
+    return this.catsService.getOwners(catId);
+  }
 }
